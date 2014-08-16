@@ -72,7 +72,7 @@ sub get {
     my $hash = $self->{'data'};
 
     foreach my $part (@parts) {
-        if(ref $val eq 'HASH') {
+        if(ref $part eq 'HASH') {
             $hash = $hash->{ $part };
         }
         else {
