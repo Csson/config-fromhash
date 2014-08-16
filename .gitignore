@@ -1,0 +1,7 @@
+/Config-FromHash-*
+/.build
+/_build*
+/Build
+MYMETA.*
+!META.json
+/.prove
