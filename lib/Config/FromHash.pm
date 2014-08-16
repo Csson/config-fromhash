@@ -41,21 +41,24 @@ sub new {
 
     my $self = bless \%args => $class;
 
-    Hash::Merge::set_set_behavior('RIGHT_PRECEDENT');
+    Hash::Merge::set_set_behavior('LEFT_PRECEDENT');
     my $data = $args{'data'};
 
-    foreach my $environment (@{ $args{'environment'} }) {
+    foreach my $environment (reverse @{ $args{'environment'} }) {
         FILE:
-        foreach my $config_file (@{ $args{'filenames'} }) {
+        foreach my $config_file (reverse @{ $args{'filenames'} }) {
             my($filename, $directory, $extension) = File::Basename::fileparse($config_file, qr{\.[^.]+$});
             my $new_filename = $directory . $filename . (defined $environment ? ".$environment" : '') . $extension;
             
             next FILE if !-e $new_filename;
             
-            $data = Hash::Merge::merge($data, $self->_parse($config_file));
+            $data = Hash::Merge::merge($self->_parse($config_file, $data);
 
         }
     }
+    $args{'data'} => $data;
+
+    return $self;
 
 }
 
