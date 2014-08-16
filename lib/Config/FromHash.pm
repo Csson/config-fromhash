@@ -52,7 +52,7 @@ sub new {
             
             next FILE if !-e $new_filename;
             
-            $data = Hash::Merge::merge($self->_parse($config_file, $data);
+            $data = Hash::Merge::merge($self->_parse($config_file, $data));
 
         }
     }
