@@ -1,12 +1,13 @@
-# Config::FromHash
+# NAME
 
 Config::FromHash - Read config files containing hashes
 
 # SYNOPSIS
+
     # in config file
     {
         thing => 'something',
-        things => \['lots', 'of', 'things'\],
+        things => ['lots', 'of', 'things'],
         deep => {
             ocean => 'submarine',
         },
