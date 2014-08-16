@@ -4,6 +4,7 @@ use strict;
 use warnings;
 use 5.010;
 
+use Data::Dump::Streamer;
 use File::Basename();
 use File::Slurp();
 use Hash::Merge();
@@ -28,6 +29,9 @@ sub new {
         $args{'filenames'} = [ $args{'filename'} ];
         delete $args{'filename'};
     }
+    else {
+        $args{'filenames'} = [];
+    }
 
     if(exists $args{'environment'} && ref $args{'environment'} ne 'ARRAY') {
         $args{'environment'} = [ $args{'environment'} ];
@@ -41,19 +45,23 @@ sub new {
 
     my $self = bless \%args => $class;
 
-    Hash::Merge::set_set_behavior('LEFT_PRECEDENT');
+    Hash::Merge::set_behavior('LEFT_PRECEDENT');
     my $data = $args{'data'};
 
-    foreach my $environment (reverse @{ $args{'environment'} }) {
-        FILE:
-        foreach my $config_file (reverse @{ $args{'filenames'} }) {
-            my($filename, $directory, $extension) = File::Basename::fileparse($config_file, qr{\.[^.]+$});
-            my $new_filename = $directory . $filename . (defined $environment ? ".$environment" : '') . $extension;
-            
-            next FILE if !-e $new_filename;
-            
-            $data = Hash::Merge::merge($self->_parse($config_file, $data));
+    if(scalar @{ $args{'filenames'} }) {
 
+        foreach my $environment (reverse @{ $args{'environment'} }) {
+
+            FILE:
+            foreach my $config_file (reverse @{ $args{'filenames'} }) {
+                my($filename, $directory, $extension) = File::Basename::fileparse($config_file, qr{\.[^.]+$});
+                my $new_filename = $directory . $filename . (defined $environment ? ".$environment" : '') . $extension;
+
+                next FILE if !-e $new_filename;
+                
+                $data = Hash::Merge::merge($self->_parse($config_file, $data));
+
+            }
         }
     }
     $args{'data'} = $data;
@@ -75,7 +83,7 @@ sub get {
     my $hash = $self->{'data'};
 
     foreach my $part (@parts) {
-        if(ref $part eq 'HASH') {
+        if(ref $hash eq 'HASH') {
             $hash = $hash->{ $part };
         }
         else {
@@ -89,7 +97,7 @@ sub _parse {
     my $self = shift;
     my $file = shift;
 
-    my $contents = File::Slurp::read_file($file, binmode => ':encoding(UTF-8');
+    my $contents = File::Slurp::read_file($file, binmode => ':encoding(UTF-8)');
     my($parsed, $error) = $self->_eval($contents);
 
     die "Can't parse <$file>: $error" if $error;
@@ -103,7 +111,7 @@ sub _eval {
     my $self = shift;
     my $contents = shift;
 
-    return (eval shift, $@);
+    return (eval $contents, $@);
 }
 
 
@@ -119,8 +127,22 @@ __END__
 Config::FromHash - Read config files containing hashes
 
 =head1 SYNOPSIS
+    # in config file
+    {
+        thing => 'something',
+        things => ['lots', 'of', 'things'],
+        deep => {
+            ocean => 'submarine',
+        },
+    }
 
-  use Config::FromHash;
+    # in module
+    use Config::FromHash;
+
+    my $config = Config::FromHash->new(filename => 'theconfig.conf', data => { thing => 'default' });
+
+    # prints 'submarine'
+    print $config->get('deep/ocean');
 
 =head1 DESCRIPTION
 
