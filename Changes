@@ -1,6 +1,8 @@
 Revision history for Config-FromHash
 
 {{$NEXT}}
+
+0.03  2014-08-16 21:16:53 CEST
 		- Removed faulty use statement
 		- Added forgotten dependency
 
