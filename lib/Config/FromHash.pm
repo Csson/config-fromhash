@@ -56,7 +56,7 @@ sub new {
 
         }
     }
-    $args{'data'} => $data;
+    $args{'data'} = $data;
 
     return $self;
 
