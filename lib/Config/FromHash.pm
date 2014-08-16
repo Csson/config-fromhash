@@ -107,6 +107,8 @@ sub _eval {
 1;
 __END__
 
+# ABSTRACT: Read config files with hashes
+
 =encoding utf-8
 
 =head1 Config::FromHash
