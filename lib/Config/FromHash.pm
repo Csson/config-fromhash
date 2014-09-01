@@ -205,11 +205,11 @@ Optional. If set to a true value Config::FromHash will C<die> if any config file
 
 =head1 METHODS
 
-B<C$self-><get($path)>>
+B<C$self-E<gt>get($path)>>
 
 Returns the value that exists at C<$path>. C<$path> is translated into hash keys, and is separated by C</>.
 
-B<C<$self->data>>
+B<C<$self-E<gt>data>>
 
 Returns the entire hash B<after> all config files have been read.
 

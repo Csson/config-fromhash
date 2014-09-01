@@ -65,11 +65,11 @@ Optional. If set to a true value Config::FromHash will `die` if any config file 
 
 # METHODS
 
-**C$self-**<get($path)>>
+**C$self->get($path)**>
 
 Returns the value that exists at `$path`. `$path` is translated into hash keys, and is separated by `/`.
 
-**`$self-`data**>
+**`$self->data`**
 
 Returns the entire hash **after** all config files have been read.
 
