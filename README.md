@@ -105,10 +105,8 @@ And then any setting that exists in `data` that has not yet been set will be set
 
     my $config->new(data => { hello => 'world', can => { find => ['array', 'refs'] });
 
-    # { hello => 'world', can => { find => ['array', 'refs'] }
+    # $hash becomes { hello => 'world', can => { find => ['array', 'refs'] }
     my $hash = $config->data;
-
-    # $hash is { hello => 'world', can => { find => ['array', 'refs'] }
     
     # prints 'refs';
     print $config->get('can/find')->[1];
