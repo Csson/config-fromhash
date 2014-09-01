@@ -1,6 +1,8 @@
 Revision history for Config-FromHash
 
 {{$NEXT}}
+    - Added data() method
+    - Documented get()
 
 0.04  2014-09-01 18:27:56 CEST
     - Require Perl 5.20
