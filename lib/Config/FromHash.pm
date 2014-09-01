@@ -10,7 +10,7 @@ use Hash::Merge();
 
 use experimental 'postderef';
 
-our $VERSION = '0.04';
+our $VERSION = '0.05';
 
 sub new {
     my($class, %args) = @_;
