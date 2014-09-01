@@ -176,7 +176,7 @@ B<C<data>>
 
 Optional. If it exists its value is used as the default settings and will be overwritten if the same setting exists in a config file.
 
-B<C<filename> or C<filenames>
+B<C<filename> or C<filenames>>
 
 Optional. C<filenames> is an alias for C<filename>. It reads better to use C<filenames> if you have many config files.
 
