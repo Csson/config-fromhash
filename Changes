@@ -1,6 +1,8 @@
 Revision history for Config-FromHash
 
 {{$NEXT}}
+
+0.04  2014-09-01 18:27:56 CEST
     - Require Perl 5.20
     - Introduce require_all_files option
     - Make filenames an alias for filename
