@@ -80,6 +80,10 @@ sub new {
 
 }
 
+sub data {
+    return shift->{'data'};
+}
+
 sub get {
     my $self = shift;
     my $path = shift;
@@ -199,6 +203,15 @@ Default: C<0>
 
 Optional. If set to a true value Config::FromHash will C<die> if any config file doesn't exist. Otherwise it will silently skip such files.
 
+=head1 METHODS
+
+B<C$self-><get($path)>>
+
+Returns the value that exists at C<$path>. C<$path> is translated into hash keys, and is separated by C</>.
+
+B<C<$self->data>>
+
+Returns the entire hash B<after> all config files have been read.
 
 =head1 EXAMPLES
 
@@ -229,6 +242,16 @@ The following files are read (with decreasing priority)
     /path/to/might_be_overwritten.file
 
 And then any setting that exists in C<data> that has not yet been set will be set.
+
+    my $config->new(data => { hello => 'world', can => { find => ['array', 'refs'] });
+
+    # { hello => 'world', can => { find => ['array', 'refs'] }
+    my $hash = $config->data;
+
+    # $hash is { hello => 'world', can => { find => ['array', 'refs'] }
+    
+    # prints 'refs';
+    print $config->get('can/find')->[1];
 
 =head1 AUTHOR
 

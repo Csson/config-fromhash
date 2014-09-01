@@ -63,6 +63,16 @@ Default: `0`
 
 Optional. If set to a true value Config::FromHash will `die` if any config file doesn't exist. Otherwise it will silently skip such files.
 
+# METHODS
+
+**C$self-**<get($path)>>
+
+Returns the value that exists at `$path`. `$path` is translated into hash keys, and is separated by `/`.
+
+**`$self-`data**>
+
+Returns the entire hash **after** all config files have been read.
+
 # EXAMPLES
 
      my $config = Config::FromHash->new(
@@ -92,6 +102,16 @@ The following files are read (with decreasing priority)
     /path/to/might_be_overwritten.file
 
 And then any setting that exists in `data` that has not yet been set will be set.
+
+    my $config->new(data => { hello => 'world', can => { find => ['array', 'refs'] });
+
+    # { hello => 'world', can => { find => ['array', 'refs'] }
+    my $hash = $config->data;
+
+    # $hash is { hello => 'world', can => { find => ['array', 'refs'] }
+    
+    # prints 'refs';
+    print $config->get('can/find')->[1];
 
 # AUTHOR
 
