@@ -1,6 +1,8 @@
 Revision history for Config-FromHash
 
 {{$NEXT}}
+    - POD errors fixed
+    - Build prereqs fixed
 
 0.05  2014-09-01 19:18:30 CEST
     - Added data() method
