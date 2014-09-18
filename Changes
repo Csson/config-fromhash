@@ -1,6 +1,8 @@
 Revision history for Config-FromHash
 
 {{$NEXT}}
+
+0.06  2014-09-18 21:00:38 CEST
     - POD errors fixed
     - Build prereqs fixed
 
