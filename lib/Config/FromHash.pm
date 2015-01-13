@@ -1,16 +1,16 @@
-package Config::FromHash;
-
 use strict;
 use warnings;
-use 5.020;
+use 5.10.1;
+
+package Config::FromHash;
+
+# VERSION
+# ABSTRACT: Read config files containing hashes
 
 use File::Basename();
-use File::Slurp();
 use Hash::Merge();
+use Path::Tiny;
 
-use experimental 'postderef';
-
-our $VERSION = '0.06';
 
 sub new {
     my($class, %args) = @_;
@@ -37,7 +37,6 @@ sub new {
     else {
         $args{'filenames'} = [];
     }
-    
 
     $args{'environments'} = $args{'filename'} if exists $args{'filename'};
 
@@ -55,12 +54,12 @@ sub new {
     Hash::Merge::set_behavior('LEFT_PRECEDENT');
     my $data = $args{'data'};
 
-    if(scalar $args{'filenames'}->@*) {
+    if(scalar @{ $args{'filenames'} }) {
 
-        foreach my $environment (reverse $args{'environments'}->@*) {
+        foreach my $environment (reverse @{ $args{'environments'} }) {
 
             FILE:
-            foreach my $config_file (reverse $args{'filenames'}->@*) {
+            foreach my $config_file (reverse @{ $args{'filenames'} }) {
                 my($filename, $directory, $extension) = File::Basename::fileparse($config_file, qr{\.[^.]+$});
                 my $new_filename = $directory . $filename . (defined $environment ? ".$environment" : '') . $extension;
 
@@ -68,7 +67,7 @@ sub new {
                     die "$new_filename does not exist" if $self->require_all_files;
                     next FILE;
                 }
-                
+
                 $data = Hash::Merge::merge($self->parse($config_file, $data));
 
             }
@@ -111,7 +110,7 @@ sub parse {
     my $self = shift;
     my $file = shift;
 
-    my $contents = File::Slurp::read_file($file, binmode => ':encoding(UTF-8)');
+    my $contents = path($file)->slurp_utf8;
     my($parsed, $error) = $self->eval($contents);
 
     die "Can't parse <$file>: $error" if $error;
@@ -136,11 +135,9 @@ sub require_all_files {
 1;
 __END__
 
+=pod
+
 =encoding utf-8
-
-=head1 NAME
-
-Config::FromHash - Read config files containing hashes
 
 =head1 SYNOPSIS
 
@@ -247,7 +244,7 @@ And then any setting that exists in C<data> that has not yet been set will be se
 
     # $hash becomes { hello => 'world', can => { find => ['array', 'refs'] }
     my $hash = $config->data;
-    
+
     # prints 'refs';
     print $config->get('can/find')->[1];
 
