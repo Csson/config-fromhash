@@ -2,6 +2,10 @@
 
 Config::FromHash - Read config files containing hashes
 
+# VERSION
+
+Version 0.0601, released 2015-01-13.
+
 # SYNOPSIS
 
     # in config file
@@ -107,7 +111,7 @@ And then any setting that exists in `data` that has not yet been set will be set
 
     # $hash becomes { hello => 'world', can => { find => ['array', 'refs'] }
     my $hash = $config->data;
-    
+
     # prints 'refs';
     print $config->get('can/find')->[1];
 
@@ -123,3 +127,22 @@ Copyright 2014- Erik Carlsson
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself.
+
+# SOURCE
+
+[https://github.com/Csson/config-fromhash](https://github.com/Csson/config-fromhash)
+
+# HOMEPAGE
+
+[https://metacpan.org/release/Config-FromHash](https://metacpan.org/release/Config-FromHash)
+
+# AUTHOR
+
+Erik Carlsson <info@code301.com>
+
+# COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2015 by Erik Carlsson <info@code301.com>.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.

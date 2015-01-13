@@ -1,10 +1,10 @@
 {
    "abstract" : "Read config files containing hashes",
    "author" : [
-      "Erik Carlsson <csson@cpan.org>"
+      "Erik Carlsson <info@code301.com>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Dist::Milla version v1.0.5, Dist::Zilla version 5.020, CPAN::Meta::Converter version 2.140640",
+   "generated_by" : "Dist::Zilla version 5.029, CPAN::Meta::Converter version 2.143240",
    "license" : [
       "perl_5"
    ],
@@ -24,15 +24,9 @@
       ]
    },
    "prereqs" : {
-      "build" : {
-         "requires" : {
-            "Test::Exception" : "0.31",
-            "Test::Pod" : "1.45"
-         }
-      },
       "configure" : {
          "requires" : {
-            "Module::Build::Tiny" : "0.037"
+            "Module::Build::Tiny" : "0.039"
          }
       },
       "develop" : {
@@ -43,9 +37,8 @@
       "runtime" : {
          "requires" : {
             "File::Basename" : "0",
-            "File::Slurp" : "9999.19",
             "Hash::Merge" : "0.200",
-            "experimental" : "0.008",
+            "Path::Tiny" : "0",
             "perl" : "5.020"
          }
       },
@@ -61,13 +54,13 @@
       "bugtracker" : {
          "web" : "https://github.com/Csson/config-fromhash/issues"
       },
-      "homepage" : "https://github.com/Csson/config-fromhash",
+      "homepage" : "https://metacpan.org/release/Config-FromHash",
       "repository" : {
          "type" : "git",
          "url" : "https://github.com/Csson/config-fromhash.git",
          "web" : "https://github.com/Csson/config-fromhash"
       }
    },
-   "version" : "0.06"
+   "version" : "0.0601"
 }
 
