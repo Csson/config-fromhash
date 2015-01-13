@@ -1,4 +1,4 @@
-requires 'perl', '5.020';
+requires 'perl', '5.010001';
 
 requires 'Hash::Merge', '0.200';
 requires 'File::Basename';
