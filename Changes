@@ -1,31 +1,48 @@
 Revision history for Config-FromHash
 
 {{$NEXT}}
+ [API Changes]
 
-0.06  2014-09-18 21:00:38 CEST
-    - POD errors fixed
-    - Build prereqs fixed
+ [Bug Fixes]
+
+ [Documentation]
+
+ [Enhancements]
+ - Uses Path::Tiny instead of File::Slurp.
+ - No more postderef, so Perl 5.10.1 should be supported.
+
+ [Meta]
+ - Replaces Dist::Milla with my own (expanded) bundle
+
+ [New Features]
+
+ [Revision]
+
+
+0.0600  2014-09-18 21:00:38 CEST
+ - POD errors fixed
+ - Build prereqs fixed
 
 0.05  2014-09-01 19:18:30 CEST
-    - Added data() method
-    - Documented get()
+ - Added data() method
+ - Documented get()
 
 0.04  2014-09-01 18:27:56 CEST
-    - Require Perl 5.20
-    - Introduce require_all_files option
-    - Make filenames an alias for filename
-    - Make environments an alias for environment
-    - Forbid using both filenames and filename in the same constructor
-    - Documentation expanded
-    - Fixed Changes indentation
-    - Missing dependency (test)
+ - Require Perl 5.20
+ - Introduce require_all_files option
+ - Make filenames an alias for filename
+ - Make environments an alias for environment
+ - Forbid using both filenames and filename in the same constructor
+ - Documentation expanded
+ - Fixed Changes indentation
+ - Missing dependency (test)
 
 0.03  2014-08-16 21:16:53 CEST
-    - Removed faulty use statement
-    - Added forgotten dependency
+ - Removed faulty use statement
+ - Added forgotten dependency
 
 0.02  2014-08-16 21:10:33 CEST
-    - Fixed POD
+ - Fixed POD
 
 0.01  2014-08-16 18:44:47 CEST
-    - Initial release
+ - Initial release
