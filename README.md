@@ -115,19 +115,6 @@ And then any setting that exists in `data` that has not yet been set will be set
     # prints 'refs';
     print $config->get('can/find')->[1];
 
-# AUTHOR
-
-Erik Carlsson <csson@cpan.org>
-
-# COPYRIGHT
-
-Copyright 2014- Erik Carlsson
-
-# LICENSE
-
-This library is free software; you can redistribute it and/or modify
-it under the same terms as Perl itself.
-
 # SOURCE
 
 [https://github.com/Csson/config-fromhash](https://github.com/Csson/config-fromhash)

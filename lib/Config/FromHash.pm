@@ -248,18 +248,4 @@ And then any setting that exists in C<data> that has not yet been set will be se
     # prints 'refs';
     print $config->get('can/find')->[1];
 
-=head1 AUTHOR
-
-Erik Carlsson E<lt>csson@cpan.orgE<gt>
-
-=head1 COPYRIGHT
-
-Copyright 2014- Erik Carlsson
-
-=head1 LICENSE
-
-This library is free software; you can redistribute it and/or modify
-it under the same terms as Perl itself.
-
-
 =cut
