@@ -4,7 +4,6 @@ use warnings;
 use FindBin '$Bin';
 use Test::More;
 use Test::Deep;
-use Test::Exception;
 use Config::FromHash;
 
 ok 1 => 'Loads';
