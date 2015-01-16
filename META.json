@@ -49,6 +49,12 @@
          }
       }
    },
+   "provides" : {
+      "Config::FromHash" : {
+         "file" : "lib/Config/FromHash.pm",
+         "version" : "0.0701"
+      }
+   },
    "release_status" : "stable",
    "resources" : {
       "bugtracker" : {
@@ -61,6 +67,6 @@
          "web" : "https://github.com/Csson/config-fromhash"
       }
    },
-   "version" : "0.0601"
+   "version" : "0.0701"
 }
 
