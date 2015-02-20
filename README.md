@@ -4,7 +4,7 @@ Config::FromHash - Read config files containing hashes
 
 # VERSION
 
-Version 0.0701, released 2015-01-16.
+Version 0.0702, released 2015-02-20.
 
 # SYNOPSIS
 

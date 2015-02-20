@@ -4,7 +4,6 @@ Revision history for Config-FromHash
  [API Changes]
 
  [Bug Fixes]
- - Removed unused use from test.
 
  [Documentation]
 
@@ -14,7 +13,27 @@ Revision history for Config-FromHash
 
  [New Features]
 
+ [Requirements]
+
  [Revision]
+
+ [Testing]
+
+0.0702 2015-02-20T01:35:53Z CET
+ [Documentation]
+ - Now includes a basic README (in addition to README.md).
+
+ [Meta]
+ - Added Travis build config.
+ - Removed cpanfile, now sets prereqs in dist.ini.
+ - Replaced iller.ini with iller.yaml.
+
+ [Requirements]
+ - Fixed a kwalitee build prereq fail.
+
+0.0701 2015-01-16T19:11:13Z CET
+ [Bug Fixes]
+ - Removed unused use from test.
 
 0.0700 2015-01-13T13:46:38Z CET
  [Enhancements]
@@ -51,3 +70,4 @@ Revision history for Config-FromHash
 
 0.01 2014-08-16T18:44:47Z CEST
  - Initial release
+
