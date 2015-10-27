@@ -1,9 +1,10 @@
 ---
-+doctype: dist
+doctype: dist
 
-name: Config-FromHash
+header:
+  name: Config-FromHash
 
-+prereqs:
+prereqs:
   runtime:
     requires:
      - perl: 5.010001
@@ -15,7 +16,7 @@ name: Config-FromHash
     requires:
      - Test::Deep: 0.110
 
-+plugins:
+plugins:
   - +config: Author::CSSON
 
   - +add_plugin: TravisYML
@@ -23,8 +24,8 @@ name: Config-FromHash
     perl_version: 5.10.1 5.14 5.20
 
 ---
-+doctype: weaver
+doctype: weaver
 
-+plugins:
+plugins:
   - +config: Author::CSSON
   - +remove_plugin: Splint

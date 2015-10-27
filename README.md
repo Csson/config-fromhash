@@ -2,9 +2,11 @@
 
 Config::FromHash - Read config files containing hashes
 
+![Requires Perl 5.10.1+](https://img.shields.io/badge/perl-5.10.1+-brightgreen.svg) [![Travis status](https://api.travis-ci.org/Csson/config-fromhash.svg?branch=master)](https://travis-ci.org/Csson/config-fromhash)
+
 # VERSION
 
-Version 0.0702, released 2015-02-20.
+Version 0.0703, released 2015-10-27.
 
 # SYNOPSIS
 
@@ -65,7 +67,18 @@ An environment can be `undef`.
 
 Default: `0`
 
-Optional. If set to a true value Config::FromHash will `die` if any config file doesn't exist. Otherwise it will silently skip such files.
+If set to a true value Config::FromHash will `die` if any config file doesn't exist. Otherwise it will silently skip such files.
+
+**`sep`**
+
+Default: `qr{/}`
+
+The separator used to split the argument to `get()`:
+
+    my $config = Config::FromHash->new(sep => qr{\.}, data => { some => { nested => { data => { is => 'deep' }}}});
+
+    # prints 'deep'
+    print $config->get('some.nested.data.is');
 
 # METHODS
 
@@ -76,6 +89,10 @@ Returns the value that exists at `$path`. `$path` is translated into hash keys, 
 **`$self->data`**
 
 Returns the entire hash **after** all config files have been read.
+
+**`$self->config_files`**
+
+Returns a list of parsed config files. Mostly useful as a debuging tool, especially if `require_all_files` is false, and the contents of `$self->data` doesn't match expectations.
 
 # EXAMPLES
 

@@ -36,7 +36,7 @@ is $conf->get('king/badmouth/selfish') => 'again'       => 'Third level';
 cmp_deeply $conf->get('headphones')->[2] => 'artist'    => 'Second level arrayref';
 
 {
-    my $conf = Config::FromHash->new(data => $hash_config, filenames => ["$Bin/configs/config-1.conf"]);
+    my $conf = Config::FromHash->new(data => $hash_config, filename => ["$Bin/configs/config-1.conf"]);
 
     cmp_deeply $conf->get('escalator') => 'broken'      => 'Data overwritten from config file';
 }

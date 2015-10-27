@@ -4,14 +4,17 @@ Revision history for Config-FromHash
  [API Changes]
 
  [Bug Fixes]
+ - Fixed bug where using the 'filename' argument didn't work.
 
  [Documentation]
+ - Added documentation for 'sep'.
 
  [Enhancements]
 
  [Meta]
 
  [New Features]
+ - Added config_files() method.
 
  [Requirements]
 

@@ -16,8 +16,9 @@ sub new {
     my($class, %args) = @_;
 
     $args{'data'} ||= {};
-    $args{'sep'}  ||= qr!/!;
+    $args{'sep'}  ||= qr{/};
     $args{'require_all_files'} ||= 0;
+    $args{'config_files'} = [];
 
     if(exists $args{'filename'} && exists $args{'filenames'}) {
         die "Don't use both 'filename' and 'filenames'.";
@@ -27,6 +28,7 @@ sub new {
     }
 
     $args{'filenames'} = $args{'filename'} if exists $args{'filename'};
+    $args{'environments'} = $args{'environment'} if exists $args{'environment'};
 
 
     if(exists $args{'filenames'}) {
@@ -37,8 +39,6 @@ sub new {
     else {
         $args{'filenames'} = [];
     }
-
-    $args{'environments'} = $args{'filename'} if exists $args{'filename'};
 
     if(exists $args{'environments'}) {
         if(ref $args{'environments'} ne 'ARRAY') {
@@ -52,7 +52,6 @@ sub new {
     my $self = bless \%args => $class;
 
     Hash::Merge::set_behavior('LEFT_PRECEDENT');
-    my $data = $args{'data'};
 
     if(scalar @{ $args{'filenames'} }) {
 
@@ -68,12 +67,12 @@ sub new {
                     next FILE;
                 }
 
-                $data = Hash::Merge::merge($self->parse($config_file, $data));
+                push @{ $args{'config_files'} } => $new_filename;
+                $args{'data'} = Hash::Merge::merge($self->parse($new_filename, $args{'data'}));
 
             }
         }
     }
-    $args{'data'} = $data;
 
     return $self;
 
@@ -100,10 +99,15 @@ sub get {
             $hash = $hash->{ $part };
         }
         else {
-            die "Can't resolve path '$path' beyond '$part'";
+            die "Can't resolve path '$path' to '$part'";
         }
     }
     return $hash;
+}
+
+sub config_files {
+    my $self = shift;
+    return @{ $self->{'config_files'} };
 }
 
 sub parse {
@@ -198,7 +202,18 @@ B<C<require_all_files>>
 
 Default: C<0>
 
-Optional. If set to a true value Config::FromHash will C<die> if any config file doesn't exist. Otherwise it will silently skip such files.
+If set to a true value Config::FromHash will C<die> if any config file doesn't exist. Otherwise it will silently skip such files.
+
+B<C<sep>>
+
+Default: C<qr{/}>
+
+The separator used to split the argument to C<get()>:
+
+    my $config = Config::FromHash->new(sep => qr{\.}, data => { some => { nested => { data => { is => 'deep' }}}});
+
+    # prints 'deep'
+    print $config->get('some.nested.data.is');
 
 =head1 METHODS
 
@@ -209,6 +224,10 @@ Returns the value that exists at C<$path>. C<$path> is translated into hash keys
 B<C<$self-E<gt>data>>
 
 Returns the entire hash B<after> all config files have been read.
+
+B<C<$self-E<gt>config_files>>
+
+Returns a list of parsed config files. Mostly useful as a debuging tool, especially if C<require_all_files> is false, and the contents of C<$self-E<gt>data> doesn't match expectations.
 
 =head1 EXAMPLES
 
